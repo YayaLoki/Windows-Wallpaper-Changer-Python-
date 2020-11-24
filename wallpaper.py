@@ -38,8 +38,11 @@ def download_images():
         SAVE_FOLDER = r"C:\Users\\" + user + "\Desktop\images"
     except:
         SAVE_FOLDER = r"C:\Users" + user + "\Desktop\images"
-    for file in os.listdir(SAVE_FOLDER):
-        os. remove(SAVE_FOLDER + "\\"+file)
+        
+    if pyautogui.confirm("Do you want to delete all images in the folder") == "OK":
+        for file in os.listdir(SAVE_FOLDER):
+            os.remove(SAVE_FOLDER + "\\"+file)
+            
     data = pyautogui.prompt("What Wallpaper Do You Want Today!")
     while data == "":
         pyautogui.alert("No word found!")
@@ -65,7 +68,7 @@ def download_images():
         with open(imagename, "wb") as file:
             file.write(response.content)
 
-    on = True
+    save = pyautogui.confirm("Do you want to save all the images")
     for i, imglink in enumerate(imglinks):
         print("imageloaded")
         img = SAVE_FOLDER + "\\" + data + str(i+1) + ".jpg"
@@ -74,7 +77,10 @@ def download_images():
         new.save(img, quality=94, optimize=True)
         ctypes.windll.user32.SystemParametersInfoW(20, 0, img, 0)
         time.sleep(cooldown)
-        os. remove(img)
+        if save == "OK":
+            pass
+        else:
+            os.remove(img)
     
     os.remove(r"C:\Users\\" + user + "\Desktop\images")
 
