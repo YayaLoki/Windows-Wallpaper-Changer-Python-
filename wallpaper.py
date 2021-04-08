@@ -26,7 +26,7 @@ cooldown = pyautogui.prompt("How long do you want each image to show")
 
 #DONT TOUCH THE REST C; (unless u know python :P)
 
-user = pyautogui.prompt("What is your computers user")
+user = pyautogui.prompt("What is your computers username")
 
 imglinks = []
 def main():
